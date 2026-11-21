@@ -60,5 +60,4 @@ gcp-credentials*.json
 bin/
 
 # Third-party broadcast footage (WPT, The Lab): never commit to a public repo
-web/demo/wpt_full_match/
 web/demo/full_match/
