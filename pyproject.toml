@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "playq"
+version = "0.1.0"
+description = "AI-powered sports analysis — Full HD 60fps broadcast highlights, spatial analytics & biomechanical intelligence for recreational sports"
+requires-python = ">=3.11"
+authors = [
+    { name = "PlayQ Team" },
+]
+dependencies = [
+    "opencv-python-headless",
+    "mediapipe",
+    "numpy",
+    "scipy",
+    "imageio-ffmpeg",
+    "edge-tts",
+    "fastapi",
+    "uvicorn[standard]",
+    "pydantic>=2.0",
+    "google-genai",
+    "python-multipart",
+    "aiofiles",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "ruff",
+    "mypy",
+]
+
+[tool.ruff]
+line-length = 100
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["playq*"]

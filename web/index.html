@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PlayQ — AI sports intelligence for every court</title>
+<meta name="description" content="Broadcast-style highlights with Hinglish commentary, movement heatmaps, injury-risk biomechanics and a FIFA-style rating from one match video.">
+<link rel="icon" href="assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav" id="nav">
+  <a class="logo" href="#/" aria-label="PlayQ home"><img src="assets/logo.png" alt="PLAYQ"></a>
+  <nav aria-label="Main">
+    <a href="#/" data-route="home">Home</a>
+    <a href="#/demo" data-route="demo">Demo</a>
+    <a href="#/how" data-route="how">How it works</a>
+    <a href="#/pricing" data-route="pricing">Pricing</a>
+  </nav>
+  <a class="btn btn-sm" href="#/demo">Watch the demo</a>
+</header>
+
+<main id="main" tabindex="-1">
+
+<!-- HOME -->
+<section class="page" data-page="home">
+  <div class="hero">
+    <div class="hero-copy">
+      <span class="pill"><i></i> Built for India's pay-and-play courts</span>
+      <h1>Every rally,<br><em>analysed.</em></h1>
+      <p class="lead">Upload one match video. Get a highlight reel with two-voice Hinglish commentary, a movement heatmap for every player,
+      an injury-risk read on your knees, and a FIFA-style PlayQ rating — in minutes, not hours.</p>
+      <div class="cta"><a class="btn" href="#/demo">See it on a real match</a><a class="btn btn-ghost" href="#/how">How it works</a></div>
+      <div class="stats">
+        <div><b>17 min → 40 s</b><span>a full match to a shareable reel</span></div>
+        <div><b>≈ $0.04</b><span>measured Gemini cost per match</span></div>
+        <div><b>₹99</b><span>per player, per match</span></div>
+      </div>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <div class="court"><span class="net"></span><span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span><span class="dot d4"></span><span class="ball"></span></div>
+      <div class="floatcard c1"><small>KNEE LOAD</small><b>97°</b><span>elevated</span></div>
+      <div class="floatcard c2"><small>PLAYQ RATING</small><b>72</b><span>PRO</span></div>
+    </div>
+  </div>
+
+  <h2 class="sec">What every match pack includes</h2>
+  <div class="grid4">
+    <article class="feat"><div class="ico">🎬</div><h3>Highlights that talk</h3><p>The best rallies, cut between shots, narrated by two Hindi commentators who actually describe what happened.</p></article>
+    <article class="feat"><div class="ico">🗺️</div><h3>Movement heatmaps</h3><p>Every player's footwork projected onto a top-down court, each in their own colour. Dead zones, kitchen discipline, depth.</p></article>
+    <article class="feat"><div class="ico">🦴</div><h3>Injury-risk biomechanics</h3><p>33-point skeletons find your deepest planted lunge and measure the knee angle, with a coaching cue.</p></article>
+    <article class="feat"><div class="ico">⭐</div><h3>FIFA-style rating</h3><p>Coverage, consistency, aggression, stamina and clutch — measured where possible, AI-estimated where not, and labelled which.</p></article>
+  </div>
+
+  <h2 class="sec">Not a black box: a cost-aware pipeline</h2>
+  <div class="flow">
+    <div><b>1</b><h4>Filter</h4><p>Audio spikes + a ball-in-flight check find live play.</p></div>
+    <div><b>2</b><h4>Measure</h4><p>OpenCV homography + MediaPipe. Deterministic geometry.</p></div>
+    <div><b>3</b><h4>Cut</h4><p>FFmpeg builds a ~40 s reel from the best moments.</p></div>
+    <div><b>4</b><h4>Reason</h4><p>Gemini sees only the reel, one frame and the numbers.</p></div>
+    <div><b>5</b><h4>Speak</h4><p>Google Cloud TTS voices the script, timed to the cuts.</p></div>
+  </div>
+  <div class="badges center"><span class="badge"><i></i>Gemini multimodal</span><span class="badge"><i></i>MediaPipe Pose</span><span class="badge"><i></i>OpenCV</span><span class="badge"><i></i>Google Cloud TTS</span><span class="badge"><i></i>FFmpeg</span><span class="badge"><i></i>Pydantic-validated JSON</span></div>
+</section>
+
+<!-- DEMO -->
+<section class="page" data-page="demo" hidden>
+  <div class="demo-head">
+    <div><h1 class="h1s">Live demo</h1><p class="muted">Real outputs from the PlayQ pipeline. Pick a match, press play, turn the sound on.</p></div>
+    <div class="runs" id="runs" role="tablist" aria-label="Choose a match"></div>
+  </div>
+  <div id="demo-body" aria-live="polite"><p class="muted">Loading…</p></div>
+</section>
+
+<!-- HOW -->
+<section class="page" data-page="how" hidden>
+  <h1 class="h1s">How it works</h1>
+  <p class="muted">Gemini never sees the raw match. Cheap deterministic code does the heavy lifting; the model only reasons about what needs vision and language.</p>
+  <div id="how-body"></div>
+  <h2 class="sec">What is measured, and what is estimated</h2>
+  <div class="two">
+    <div class="panel"><h3>Measured by code (deterministic)</h3><ul>
+      <li>Player positions on the court (4–8 point homography, camera-drift correction)</li>
+      <li>Court coverage, time near the net, movement speed</li>
+      <li>Joint angles from 33-point pose, e.g. knee flexion at the deepest planted lunge</li>
+      <li>When the ball is actually in play on this court</li></ul></div>
+    <div class="panel"><h3>Estimated by Gemini (labelled * in the app)</h3><ul>
+      <li>Shot consistency, clutch factor, shot-style aggression, from a ~40 s reel</li>
+      <li>Injury-risk second opinion on the flagged frame</li>
+      <li>Commentary, caption and roast, written against the reel's real timeline</li></ul></div>
+  </div>
+  <h2 class="sec">Honest limits</h2>
+  <div class="panel"><ul class="limits">
+    <li>Demo footage is third-party broadcast video, not the PlayQ pod. Pod capture (₹5,000, 1080p/60 fps) is not demonstrated by it.</li>
+    <li>On overhead footage the far-court players are small and tracked less reliably; far-side positions are ±0.5–1 m.</li>
+    <li>Knee-risk bands and rating scales are heuristics, not medical advice. Valgus needs the player to face or turn away from the camera.</li>
+    <li>Player identity is the weakest link on multi-player broadcast video; per-player cards there are indicative.</li></ul></div>
+</section>
+
+<!-- PRICING -->
+<section class="page" data-page="pricing" hidden>
+  <h1 class="h1s">Simple, venue-friendly pricing</h1>
+  <p class="muted">A ₹5,000 camera pod, covered by a refundable venue deposit, and software that pays for itself in match packs.</p>
+  <div class="grid3">
+    <article class="price"><small>PLAYERS</small><h3>Match Pack</h3><div class="amt">₹99<span>/ player / match</span></div>
+      <ul><li>Highlight reel with commentary</li><li>Heatmap + knee-load audit</li><li>PlayQ rating card</li><li>Shareable on WhatsApp</li></ul><a class="btn btn-ghost" href="#/demo">See a sample</a></article>
+    <article class="price hot"><small>VENUES</small><h3>Smart Arena</h3><div class="amt">₹4,999<span>/ court / month</span></div>
+      <ul><li>Live venue leaderboard</li><li>Court-side QR for players</li><li>70:30 revenue share on match packs</li><li>Plug-and-play pod install</li></ul><a class="btn" href="#/demo">Watch the demo</a></article>
+    <article class="price"><small>UNIT ECONOMICS</small><h3>Measured, not guessed</h3><div class="amt">≈ $0.04<span>Gemini cost / match</span></div>
+      <ul><li>Voice: first 1M characters/month free</li><li>Reel + frame + numbers only reach Gemini</li><li>Full 17-min match: ~5 min compute</li></ul><a class="btn btn-ghost" href="#/how">How we keep it cheap</a></article>
+  </div>
+</section>
+</main>
+
+<footer class="foot"><img src="assets/logo.png" alt="PLAYQ"><p>AI sports intelligence for recreational courts · Delhi-NCR pilot</p>
+  <p class="muted small">Some demo videos are third-party test footage, shown for technical demonstration only (each is labelled in the demo).</p></footer>
+<script src="app.js"></script>
+</body>
+</html>

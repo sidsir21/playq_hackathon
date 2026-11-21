@@ -1,0 +1,64 @@
+# PlayQ — Python
+.venv/
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+dist/
+build/
+*.egg-info/
+*.egg
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Data & media (too large for git)
+data/
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.wav
+*.png
+*.jpg
+!docs/**/*.png
+!docs/**/*.jpg
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# macOS
+.DS_Store
+.AppleDouble
+
+# Node (frontend)
+frontend/node_modules/
+frontend/.next/
+frontend/.vercel/
+
+# Cloud credentials
+*.json
+!pyproject.toml
+service-account*.json
+gcp-credentials*.json
+
+# Static web app assets must be committed
+!web/**/*.png
+!web/**/*.jpg
+!web/**/*.mp4
+!web/**/*.json
+
+# local tooling
+bin/
+
+# Third-party broadcast footage (WPT, The Lab): never commit to a public repo
+web/demo/wpt_full_match/
+web/demo/full_match/
